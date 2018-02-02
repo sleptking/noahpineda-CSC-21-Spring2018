@@ -61,36 +61,12 @@ string CardNumber(int linenumber){
 
 string CardType(string card){
    //Read each credit card number and determine which card it is based on the BIN. If card isnt on the list output "Unknown Card Type"
-   stringstream cardlength;
-   stringstream cardprefix;
-   stringstream binprefix;
-   ifstream fin;
-   string type = "none";
-   int test;
-   card = "341234567891234";
-   //Open BIN file
-   fin.open("BIN.txt");
-   string line;
    while(type == "none"){
-        getline(fin,line);
-        cardlength << line.at(8) << line.at(9);
-        binlength = cardlength.str();
-        if(card.length() == binlength){
-            if(card.at(0) == line.at(0) && card.at(1) == line.at(1)){
+        if(card.length() == 15 && card.at(0) == 3 && card.at(1) == 4||7){
                 type = "American Express";
-            }
-            else if(card.at(4) == line.at(4) && card.at(5) == line.at(5)){
-                type = "American Express";
-            }
          }
-         getline(fin,line);
-         ss.str("");
-         ss << line.at(36) << line.at(37);
-         binlength = ss.str();
-         cout << binlength;
-         cin >> test;
-         else if(card.length() == binlength){
-            if(card.at(0) == line.at(0) && card.at(1) == line.at(1)){
+         else if(card.length() == 16){
+            if(card.at(0) <= 622126 || card.precision(6) >= 622925){
                 type = "Discover";
             }
             else if(card.at(4) == line.at(4) && card.at(5) == line.at(5)){
