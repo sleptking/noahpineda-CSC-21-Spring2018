@@ -24,6 +24,7 @@ int main()
    type = CardType(number);
    cout << "type: " << type << " " << "number:" << number << endl;
    }
+   return 0;
 }
 
 int Count(){
@@ -60,17 +61,56 @@ string CardNumber(int linenumber){
 }
 
 string CardType(string card){
-   //Read each credit card number and determine which card it is based on the BIN. If card isnt on the list output "Unknown Card Type"
+   //Read each credit card number and determine which card it is based on the BIN. If card isn't on the list output "Unknown Card Type"
+   card = "378282246310005";
+   string type("none");
    while(type == "none"){
-        if(card.length() == 15 && card.at(0) == 3 && card.at(1) == 4||7){
+      if(card.length() == 15 && card.at(0) == 3){
+         if(card.at(1) == 4 || card.at(1) == 7){
                 type = "American Express";
          }
+      }
          else if(card.length() == 16){
-            
+            stringstream ss;
+            ss << card.at(0) << card.at(1) << card.at(2) << card.at(3) << card.at(4) << card.at(5);
+            int prefix;
+            ss >> prefix;
+            if(622126 <= prefix && prefix <= 622925){
+               type = "Master Card";
+            }
+            ss << card.at(0) << card.at(1) << card.at(2) << card.at(3);
+            ss >> prefix;
+            if(prefix == 6011){
+               type = "Master Card";
+            }
+            ss << card.at(0) << card.at(1) << card.at(2);
+            ss >> prefix;
+            if(644 <= prefix && prefix <= 649){
+               type = "Master Card";
+            }
+            ss << card.at(0) << card.at(1);
+            ss >> prefix;
+            if(prefix == 65){
+               type = "Master Card";
+            }
+            ss << card.at(0) << card.at(1);
+            ss >> prefix;
+            if(51 <= prefix && prefix <= 55){
+               type = "Discover";
+            }
+            else if(card.at(0) == 4){
+               type = "VISA";
+            }
+         }
+         else if(13 <= card.length() && card.length() <= 16 && card.at(0) == 4){
+            type = "VISA";
+         }
+         else
+            type = "Unknown Card Type";
     }
    return type;
 }
 
-string LuhnCheck{
-   
+bool LuhnCheck(){
+
 }
