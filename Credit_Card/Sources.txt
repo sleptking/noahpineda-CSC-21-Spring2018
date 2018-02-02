@@ -1,8 +1,0 @@
-https://www.youtube.com/watch?v=Iho2EdJgusQ
-https://www.youtube.com/watch?v=AT1raQhyzPU
-https://www.youtube.com/watch?v=vbdDS7f3DSE
-https://www.youtube.com/watch?v=BZcFMTxU-TY&t=7s
-http://www.cplusplus.com/forum/beginner/26997/
-https://stackoverflow.com/questions/5207550/in-c-is-there-a-way-to-go-to-a-specific-line-in-a-text-file
-http://www.cplusplus.com/reference/sstream/stringstream/
-http://www.cplusplus.com/reference/string/string/getline/
