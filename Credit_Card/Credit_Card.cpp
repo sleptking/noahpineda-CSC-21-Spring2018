@@ -66,34 +66,7 @@ string CardType(string card){
                 type = "American Express";
          }
          else if(card.length() == 16){
-            if(card.at(0) <= 622126 || card.precision(6) >= 622925){
-                type = "Discover";
-            }
-            else if(card.at(4) == line.at(4) && card.at(5) == line.at(5)){
-                type = "Discover";
-            }
-            getline(fin,line);
             
-            else if(card.at(4) == line.at(4) && card.at(5) == line.at(5)){
-                type = "Master Card";
-            }
-            else if(card.at(4) == line.at(4) && card.at(5) == line.at(5)){
-                type = "Master Card";
-            }
-            else if(card.at(4) == line.at(4) && card.at(5) == line.at(5)){
-                type = "VISA";
-            }
-         }
-         getline(fin,line);
-         ss.str("");
-         ss << line.at(36) << line.at(37);
-         else if(){   
-            else if(card.at(4) == line.at(4) && card.at(5) == line.at(5)){
-                type = "VISA";
-            }
-            
-         }   
-         
     }
    return type;
 }
