@@ -23,7 +23,6 @@
  */
 string PrepareForDisplay(int values[], int size, char separator){
     stringstream ss;
-    string stream;
     int temp = size - 1;
     for(int i = 0; i < size; i++){
         if(i == (size - 1))
@@ -31,8 +30,7 @@ string PrepareForDisplay(int values[], int size, char separator){
         else
             ss << values[i] << separator;
     }
-    ss >> stream;
-    return stream;
+    return ss.str();
 }
 
 /*
@@ -75,7 +73,15 @@ bool HasValue(int values[], int size, int value){
  *               to false. if index is invalid, returns 0 and sets error to true
  */
 int ValueAt(int values[], int size, int index, bool &error){
-    return 0;
+    if(index >= size){
+        index = 0;
+        error = true;
+        return 0;
+    }
+    else{
+        error = false;
+        return values[index];
+    }
 }
 
 /*
@@ -85,7 +91,10 @@ int ValueAt(int values[], int size, int index, bool &error){
  * @return int - The sum of the values in the array
  */
 int Sum(int values[], int size){
-    int sum;
+    int sum = 0;
+    for(int i = 0;i < size;i++){
+        sum = sum + values[i];
+    }
     return sum;
 }
 
@@ -99,6 +108,14 @@ int Sum(int values[], int size){
  * @return bool - true if the swap was successful, otherwise false
  */
 bool SwapValues(int values[], int size, int index1, int index2){
-    bool success;
+    bool success = false;
+    int temp1,temp2;
+    if(index1 < size && index1 >= 0 && index2 < size && index2 >= 0){
+        temp1 = values[index1];
+        temp2 = values[index2];
+        values[index1] = temp2;
+        values[index2] = temp1;
+        success = true;
+    }
     return success;
 }
