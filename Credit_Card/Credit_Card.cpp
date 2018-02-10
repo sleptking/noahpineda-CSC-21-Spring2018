@@ -25,7 +25,7 @@ int main()
       if(valid == true){
          string type;
          type = CardType(number);
-         cout << "type: " << type << " " << "number: " << number << endl;
+         cout << "Type: " << type << " || " << "Number: " << number << endl;
          }
       else{
          cout << "Invalid Card" << endl;
