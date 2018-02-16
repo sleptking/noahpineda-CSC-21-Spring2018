@@ -2,7 +2,7 @@
  * Name        : Credit Card.cpp
  * Author      : Noah Pineda
  * Description : Recieve credit card numbers from a file and compare them to a BIN file to determine credit card type.
- * Sources     : Need to sort through my sources
+ * Sources     : http://www.cplusplus.com/reference/sstream/stringstream/, https://www.youtube.com/watch?v=HcONWqVyvlg, http://umairj.com/374/how-to-test-credit-card-numbers-using-luhns-algorithm/ 
 */
 #include <iostream>
 #include <fstream>

@@ -1,0 +1,30 @@
+Concept Inventory:
+
+    Concept	                                                        Score	      Notes on how you may improve your score or on your score
+    Know some of the people in your class.		                       3 
+    Problem statement for Problem 1 Part A		                       5
+    Compile a program with g++		                                   2
+    Compile a program using a make file		                           3
+    Compile a program with multiple files (headers and cpp)		       3
+    Pseudo Code		                                                   5
+    Class style guide		                                           4
+    Create a function using parameters and returns		               5
+    Basic string skills		                                           5
+    Stringstream		                                               4
+    File input/output		                                           4
+    Using Loops and decisions		                                   5
+    Commenting		                                                   3
+    Scope		                                                       5
+    Abstraction		                                                   1
+    Code reuse		                                                   1
+    Classes and Objects		                                           4
+    Inheritance		                                                   3
+    Polymorphism                                                       3
+
+Psuedo Code:
+    1. Recieve input from a text file with card numbers on it.
+    2. Check validity by putting the number through Luhn Algorithm.
+    3. Compare the card number to the prefixes and lengths provided to determine the card type.
+    4. If no card type tell the user "unknown card type"
+    5. Output the card type and the card number.
+    
