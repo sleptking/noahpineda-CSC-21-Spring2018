@@ -1,0 +1,6 @@
+Psuedo Code:
+    1. Recieve input from two files: one containing card information and another containing transaction data.
+    2. Create an array of credit card objects.
+    3. Run the transactions through the cards to determine if they are valid and to determine if the transaction will be allowed or denied.
+    4. Save the total amount spent.
+    5. 
