@@ -1,6 +1,6 @@
-378282246310005 Jon Goldman Gold
-371449635398431 Morgan Freeman Gold
-378734493671000 Zach Braff Gold
-5555555555554444 Aziz Ansari Platinum
-6011111111111117 Dave Franco Corporate
-6011000990139424 Kassem Garibaldeh Corporate
+378282246310005 Jon Goldman Gold 3000
+371449635398431 Morgan Freeman Gold 3000
+378734493671000 Zach Braff Gold 3000
+5555555555554444 Aziz Ansari Platinum 5000
+6011111111111117 Dave Franco Corporate 10000
+6011000990139424 Kassem Gharaibeh Corporate 10000
