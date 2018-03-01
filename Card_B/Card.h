@@ -45,7 +45,7 @@ class Card{
         bool valid_;
         double total_;
         string transactions_;
-        string errtrans_;
+        string badtrans_;
 };
 
 #endif

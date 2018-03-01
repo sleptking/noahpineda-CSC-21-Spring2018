@@ -93,7 +93,7 @@ void Card::set_transactions(string TSstring){
 }
 
 void set_badtrans(string badtrans, string reason){
-    errtrans_ = errtrans_ + badtrans + " " + reason + '\n';
+    badtrans_ = badtrans_ + badtrans + " " + reason + '\n';
 }
 //Functions
 void Card::CardType(string card){
