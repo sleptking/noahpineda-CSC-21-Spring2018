@@ -1,6 +1,14 @@
 #include "Card.h"
 
-Card::Card(int Cnumber, string Cfirstname, string Clastname, string Ctype, double Cbalance){
+Card::Card(){
+    set_number("0");
+    set_firstname("none");
+    set_lastname("none");
+    set_type("none"); 
+    set_balance(0);
+}
+
+Card::Card(string Cnumber, string Cfirstname, string Clastname, string Ctype, double Cbalance){
     set_number(Cnumber);
     set_firstname(Cfirstname);
     set_lastname(Clastname);
@@ -8,7 +16,7 @@ Card::Card(int Cnumber, string Cfirstname, string Clastname, string Ctype, doubl
     set_balance(Cbalance);
 }
 
-virtual Card::~Card(){
+Card::~Card(){
     
 }
 
@@ -32,7 +40,7 @@ string Card::get_lastname(){
     return lastname_;
 }
 
-int Card::get_number(){
+string Card::get_number(){
     return number_;
 }
 
@@ -43,6 +51,10 @@ bool Card::get_valid(){
 double Card::get_total(){
     return total_;
 }
+
+//string Card::get_transactions(){
+  //  return transactions_;
+//}
 
 void Card::set_type(string type){
     type_ = type;
@@ -64,7 +76,7 @@ void Card::set_lastname(string lastname){
     lastname_ = lastname;
 }
 
-void Card::set_number(int number){
+void Card::set_number(string number){
     number_ = number;
 }
 
@@ -75,6 +87,10 @@ void Card::set_valid(bool valid){
 void Card::set_total(double total){
     total_ = total;
 }
+
+//void Card::set_transactions(string TSstring){
+//    transactions_ = transactions_ + TSstring;
+//}
 
 void Card::CardType(string card){
    //Function reads each credit card number and determines which card it is based on the BIN. If card isn't on the list outputs "Unknown Card Type"
@@ -132,19 +148,19 @@ void Card::CardType(string card){
 
 void Card::LuhnCheck(string card){
     //Function recieves a card number then checks if the card is valid using the Luhn Algorithm
-   stringstream luhnss;
-   stringstream ss;
-   //Flips the card number into a strinstream
-   for(int i = 1;i < card.length();i++){
+    stringstream luhnss;
+    stringstream ss;
+    //Flips the card number into a strinstream
+    for(int i = 1;i < card.length();i++){
          if(i > 0)
          luhnss << card.at((card.length() - 1) - i) << " ";
          else
          luhnss << card.at((card.length() - 1) - i);
-   }
-   //Runs card number through Luhn Algorithm
-   int temp;
-   int other(1), dub(0), sum(0);
-   for(int i = 1;i < card.length();i++){
+    }
+    //Runs card number through Luhn Algorithm
+    int temp;
+    int other(1), dub(0), sum(0);
+    for(int i = 1;i < card.length();i++){
         luhnss >> temp;
         if(other == 1){
             dub = temp * 2;
@@ -158,23 +174,37 @@ void Card::LuhnCheck(string card){
             sum = sum + temp;
             other = 1;
         }
-      
-   }
-   //Compares the check number from Luhn Algorithm to the check number from the card
-   bool valid;
-   ss << card.back();
-   int back;
-   int checkdigit;
-   ss >> back;
-   checkdigit = ((sum * 9)%10);
-   if(checkdigit == back)
-      valid = true;
-   else
-      valid = false;
-   //Returns true for valid cards and false for invalid cards
-   set_valid(valid);
+          
+    }
+    //Compares the check number from Luhn Algorithm to the check number from the card
+    bool valid;
+    ss << card.at(card.length() - 1);
+    int back;
+    int checkdigit;
+    ss >> back;
+    checkdigit = ((sum * 9)%10);
+    if(checkdigit == back)
+        valid = true;
+    else
+        valid = false;
+    //Returns true for valid cards and false for invalid cards
+    set_valid(valid);
 }
 
-void Card::Rebate(double balance){
-     
+void Card::Rebate(double total){
+    double addrebate;
+    if(type_ == "gold"){
+        addrebate = (total * .01);
+    }
+    else if(type_ == "corporate"){
+        addrebate = (total * .03);
+    }
+    else if(type_ == "platinum"){
+        addrebate = (total * .05);
+    }
+    set_total(total + addrebate);
  }
+ 
+void Card::Output(){
+    cout << number_ << " " << type_ << " " << firstname_ << " " << lastname_ << " " << balance_ << endl;
+}
