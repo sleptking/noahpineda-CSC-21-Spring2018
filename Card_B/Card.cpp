@@ -1,22 +1,30 @@
 #include "Card.h"
 
-Card::Card(){
+Card::Card(){//Default Constructor
     set_number("0");
     set_firstname("none");
     set_lastname("none");
     set_type("none"); 
     set_balance(0);
+    set_total(0);
+    set_overdrawn(false);
 }
 
-Card::Card(string Cnumber, string Cfirstname, string Clastname, string Ctype, double Cbalance){
-    set_number(Cnumber);
+Card::Card(string Cnumber, string Cfirstname, string Clastname, string Ctype, double Cbalance){//Overloaded Constructor
+    //Check numbers using Luhn Algorithm
+    if(LuhnCheck(Cnumber))
+        set_number(Cnumber);
+    else
+        set_number("Invalid Number");
     set_firstname(Cfirstname);
     set_lastname(Clastname);
     set_type(Ctype);
     set_balance(Cbalance);
+    set_total(0);
+    set_overdrawn(false);
 }
 
-Card::~Card(){
+Card::~Card(){//Destructor
     
 }
 //Accessors
@@ -28,8 +36,11 @@ double Card::get_balance(){
     return balance_;
 }
 
-bool Card::get_overdrawn(){
-    return overdrawn_;
+string Card::get_overdrawn(){
+    if (overdrawn_ == true)
+        return "true";
+    else
+        return "false";
 }
 
 string Card::get_firstname(){
@@ -54,6 +65,14 @@ double Card::get_total(){
 
 string Card::get_transactions(){
     return transactions_;
+}
+
+string Card::get_badtrans(){
+    return badtrans_;
+}
+
+double Card::get_rebate(){
+    return rebate_;
 }
 //Mutators
 void Card::set_type(string type){
@@ -92,10 +111,14 @@ void Card::set_transactions(string TSstring){
     transactions_ = transactions_ + number_ + ":" + TSstring + '\n';
 }
 
-void set_badtrans(string badtrans, string reason){
-    badtrans_ = badtrans_ + badtrans + " " + reason + '\n';
+void Card::set_badtrans(string badtrans, string reason){
+    badtrans_ = badtrans_ + badtrans + " " + reason;
 }
-//Functions
+
+void Card::set_rebate(double rebate){
+    rebate_ = rebate;
+}
+//Member Functions
 void Card::CardType(string card){
    //Function reads each credit card number and determines which card it is based on the BIN. If card isn't on the list outputs "Unknown Card Type"
    stringstream ss;
@@ -150,7 +173,7 @@ void Card::CardType(string card){
     set_type(type);
 }
 
-void Card::LuhnCheck(string card){
+bool Card::LuhnCheck(string card){
     //Function recieves a card number then checks if the card is valid using the Luhn Algorithm
     stringstream luhnss;
     stringstream ss;
@@ -191,27 +214,34 @@ void Card::LuhnCheck(string card){
         valid = true;
     else
         valid = false;
-    //Returns true for valid cards and false for invalid cards
+    //sets true for valid cards and false for invalid cards
     set_valid(valid);
+    //Returns validity
+    return valid;
 }
 
 void Card::Rebate(){
     //Adds the rebate to the balance
-    double addrebate;
-    if(type_ == "gold"){
+    double addrebate = 0;
+    if(type_ == "Gold"){
         addrebate = (total_ * .01);
     }
-    else if(type_ == "corporate"){
+    else if(type_ == "Corporate"){
         addrebate = (total_ * .03);
     }
-    else if(type_ == "platinum"){
+    else if(type_ == "Platinum"){
         addrebate = (total_ * .05);
     }
     set_total(total_ + addrebate);
+    set_rebate(addrebate);
  }
  
 void Card::Output(){
-    cout << number_ << " " << type_ << " " << firstname_ << " " << lastname_ << " " << balance_ << endl;
+    cout << get_number() << " " << get_type() << " " << get_firstname() << " " << get_lastname() << " " << endl;
+    cout << "Accounnt Summary:" << endl;
+    cout << "Current Balance: $" << get_balance() << " Overdrawn Status: " << get_overdrawn() << " Rebate: $" << get_rebate() << endl;
+    cout << "Transaction Summary: " << endl << get_transactions() << endl;
+    cout << "Failed Transactions: " << endl << get_badtrans() << endl;
 }
 
 void Card::RunTrans(){
@@ -244,10 +274,12 @@ void Card::RunTrans(){
         //store cost as int
         ss << tmp1;
         ss >> cost;
-        //Determine if the transaction will go through and apply the cost to the balance
+        //Determine if the transaction will go through and apply the cost to the balance.
+        //If there are not enough funds in the account, send to bad trans and set reason to insufficient funds.
         if(type_ == "Gold"){
             if((balance_ - cost) >= 0){
                 balance_ = balance_ - cost;
+                total_ = total_ + cost;
             }
             else{
             string tmpreason;
@@ -258,6 +290,10 @@ void Card::RunTrans(){
         else if(type_ == "Platinum"){
             if((balance_ - cost) >= -1000){
                 balance_ = balance_ - cost;
+                total_ = total_ + cost;
+                if(balance_ < 0){
+                    set_overdrawn(true);
+                }
             }
             else{
             string tmpreason;
@@ -268,6 +304,10 @@ void Card::RunTrans(){
         else if(type_ == "Corporate"){
             if((balance_ - cost) >= -5000){
                 balance_ = balance_ - cost;
+                total_ = total_ + cost;
+                if(balance_ < 0){
+                    set_overdrawn(true);
+                }
             }
             else{
             string tmpreason;

@@ -9,6 +9,7 @@
 #include <sstream>
 #include <vector>
 #include "Card.h"
+#include "Bad_Card.h"
 using namespace std;
 
 stringstream ss;
@@ -19,7 +20,9 @@ double balance;
 string number, firstname, lastname, type, tmp = " ";
 ifstream fin;
 //Creates a vector of card objects
-vector<Card> cards(7);
+vector<Card> cards(6);
+//Invalid Card object
+BadCard error;
 //Function declarations
 void GetInfo();
 void ClearVar();
@@ -52,8 +55,7 @@ int main(){
     GetInfo();
     Card test5(number, firstname, lastname, type, balance);
     ClearVar();
-    //Invalid Card object
-    Card error;
+   
     //Closes CardInfo File
     fin.close();
     //Put the cards into the vector
@@ -63,7 +65,6 @@ int main(){
     cards.at(3) = test3;
     cards.at(4) = test4;
     cards.at(5) = test5;
-    cards.at(6) = error;
     //Opens TransactionInfo File
     fin.open("TransactionInfo.txt");
     //Strings to hold transaction card number adn transactions
@@ -75,8 +76,28 @@ int main(){
     }
     //Closes TransactionInfo file
     fin.close();
+    //Run Transactions through each card
+    cards.at(0).RunTrans();
+    cards.at(1).RunTrans();
+    cards.at(2).RunTrans();
+    cards.at(3).RunTrans();
+    cards.at(4).RunTrans();
     cards.at(5).RunTrans();
-    cout << cards.at(5).get_balance() << endl;
+    //Apply the rebate to each card
+    cards.at(0).Rebate();
+    cards.at(1).Rebate();
+    cards.at(2).Rebate();
+    cards.at(3).Rebate();
+    cards.at(4).Rebate();
+    cards.at(5).Rebate();
+    //Output Account summary for each card
+    cards.at(0).Output();
+    cards.at(1).Output();
+    cards.at(2).Output();
+    cards.at(3).Output();
+    cards.at(4).Output();
+    cards.at(5).Output();
+    error.BOutput();
     return 0;
 }
 
@@ -165,7 +186,7 @@ void SetTransaction(string Tcard){
     }
     else{
         getline(fin, Tstring);
-        cards.at(6).set_transactions(Tstring);
+        error.set_transactions(Tstring);
     }
         
 }
