@@ -1,7 +1,7 @@
 /*
  * Name        : Credit_Card_B.cpp
  * Author      : Noah Pineda
- * Description :
+ * Description : Hold and modify account information and transaction information then output a monthkly statement.
  * Sources     :
 */
 #include <iostream>
