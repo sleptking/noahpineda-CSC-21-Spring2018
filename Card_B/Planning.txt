@@ -32,3 +32,11 @@ Classes and Objects		                                            5
 Inheritance		                                                    5
 Polymorphism		                                                3           Need to read the zybooks about it and watch videos
  
+Test:
+    Objectives:
+        1. Recieve input from the card number file and store them as class objects. 
+        2. Recieve input from the transaction file.
+        3. Run the transactions through each account and store the new information in the correct accounts.
+        4. Output the account summary.
+    Condition:
+        1. Test is passed if all of the accounts output correctly.
