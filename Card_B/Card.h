@@ -1,9 +1,8 @@
 #ifndef CARD_H
 #define CARD_H
 #include <iostream>
-#include <fstream>
 #include <sstream>
-
+#include <fstream>
 using namespace std;
 
 class Card{//Class to hold and modify card and account information
@@ -40,9 +39,8 @@ class Card{//Class to hold and modify card and account information
         //Member Functions
         void CardType(string card);
         bool LuhnCheck(string card);
-        void Rebate();
         void Output();
-        void RunTrans();
+        void SetTrans();
     private:
         //Member Variables
         string type_;

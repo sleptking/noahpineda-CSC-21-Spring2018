@@ -16,6 +16,7 @@ Card::Card(string Cnumber, string Cfirstname, string Clastname, string Ctype, do
         set_number(Cnumber);
     else
         set_number("Invalid Number");
+        
     set_firstname(Cfirstname);
     set_lastname(Clastname);
     set_type(Ctype);
@@ -219,22 +220,6 @@ bool Card::LuhnCheck(string card){
     //Returns validity
     return valid;
 }
-
-void Card::Rebate(){
-    //Adds the rebate to the balance
-    double addrebate = 0;
-    if(type_ == "Gold"){
-        addrebate = (total_ * .01);
-    }
-    else if(type_ == "Corporate"){
-        addrebate = (total_ * .03);
-    }
-    else if(type_ == "Platinum"){
-        addrebate = (total_ * .05);
-    }
-    set_total(total_ + addrebate);
-    set_rebate(addrebate);
- }
  
 void Card::Output(){
     cout << get_number() << " " << get_type() << " " << get_firstname() << " " << get_lastname() << " " << endl;
@@ -244,79 +229,20 @@ void Card::Output(){
     cout << "Failed Transactions: " << endl << get_badtrans() << endl;
 }
 
-void Card::RunTrans(){
-    //Declare Variables
-    stringstream ss, TMPss;
-    string tmp, tmp1, tmptrans;
-    int cost = 0;
-    //Count new line characters to determin iterations
-    int count = 0;
-    for(int i = 0;i < transactions_.size();i++){
-        char c = '\n';
-        if(transactions_.at(i) == c){
-            count++;
-        }
+void Card::SetTrans(){
+    //Compare Transaction card number to card object numbers to group transactions to cards
+    ifstream fin;
+    string Tstring;
+    //Opens TransactionInfo File
+    fin.open("TransactionInfo.txt");
+    //Loop through the file to sort through all of the transactions
+    while(!fin.eof()){
+        getline(fin, Tstring, ':');
+        if(get_number() == Tstring){
+            getline(fin, Tstring);
+            set_transactions(Tstring);
+            }
     }
-    int itcount = 0;
-    //Loop through transactions and apply them to each card
-    while(count != itcount){
-        //Store current transaction for later
-        TMPss << transactions_;
-        getline(TMPss, tmptrans, '\n');
-        TMPss.clear();
-        TMPss.str("");
-        //Get cost from transaction
-        TMPss << tmptrans;
-        getline(TMPss, tmp, ':');
-        getline(TMPss, tmp1, ':');
-        TMPss.clear();
-        TMPss.str("");
-        //store cost as int
-        ss << tmp1;
-        ss >> cost;
-        //Determine if the transaction will go through and apply the cost to the balance.
-        //If there are not enough funds in the account, send to bad trans and set reason to insufficient funds.
-        if(type_ == "Gold"){
-            if((balance_ - cost) >= 0){
-                balance_ = balance_ - cost;
-                total_ = total_ + cost;
-            }
-            else{
-            string tmpreason;
-            tmpreason = "Insufficient Funds\n";
-            set_badtrans(tmptrans, tmpreason);
-            }
-        }
-        else if(type_ == "Platinum"){
-            if((balance_ - cost) >= -1000){
-                balance_ = balance_ - cost;
-                total_ = total_ + cost;
-                if(balance_ < 0){
-                    set_overdrawn(true);
-                }
-            }
-            else{
-            string tmpreason;
-            tmpreason = "Insufficient Funds\n";
-            set_badtrans(tmptrans, tmpreason);
-            }    
-        }
-        else if(type_ == "Corporate"){
-            if((balance_ - cost) >= -5000){
-                balance_ = balance_ - cost;
-                total_ = total_ + cost;
-                if(balance_ < 0){
-                    set_overdrawn(true);
-                }
-            }
-            else{
-            string tmpreason;
-            tmpreason = "Insufficient Funds\n";
-            set_badtrans(tmptrans, tmpreason);
-            }
-        }
-        itcount++;
-        ss.clear();
-        ss.str("");
-    }
+    //Closes TransactionInfo file
+    fin.close();
 }

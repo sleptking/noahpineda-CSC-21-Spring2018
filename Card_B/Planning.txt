@@ -11,26 +11,26 @@ Psuedo Code:
     10.Output Account summary for each card
 
 Concept Inventory:   
-Concept	                                                        Score	        Notes on how you may improve your score or on your score
-Know some of the people in your class.		                        5
-Problem statement for Problem 1 Part A		                        5
-Compile a program with g++		                                    4
-Compile a program using a make file		                            5
-Compile a program with multiple files (headers and cpp)		        5
-Pseudo Code		                                                    3           Just need to practice mapping ut my program before i write it.
-Class style guide		                                            4
-Create a function using parameters and returns		                5
-Basic string skills		                                            5
-Stringstream		                                                5
-File input/output		                                            5
-Using Loops and decisions		                                    5
-Commenting		                                                    4
-Scope		                                                        5
-Abstraction		                                                    5
-Code reuse		                                                    5
-Classes and Objects		                                            5
-Inheritance		                                                    5
-Polymorphism		                                                3           Need to read the zybooks about it and watch videos
+    Concept	                                                        Score	        Notes on how you may improve your score or on your score
+    Know some of the people in your class.		                        5
+    Problem statement for Problem 1 Part A		                        5
+    Compile a program with g++		                                    4
+    Compile a program using a make file		                            5
+    Compile a program with multiple files (headers and cpp)		        5
+    Pseudo Code		                                                    3           Just need to practice mapping ut my program before i write it.
+    Class style guide		                                            4
+    Create a function using parameters and returns		                5
+    Basic string skills		                                            5
+    Stringstream		                                                5
+    File input/output		                                            5
+    Using Loops and decisions		                                    5
+    Commenting		                                                    4
+    Scope		                                                        5
+    Abstraction		                                                    5
+    Code reuse		                                                    5
+    Classes and Objects		                                            5
+    Inheritance		                                                    5
+    Polymorphism		                                                3           Need to read the zybooks about it and watch videos
  
 Test:
     Objectives:
@@ -40,3 +40,5 @@ Test:
         4. Output the account summary.
     Condition:
         1. Test is passed if all of the accounts output correctly.
+    Tested:
+        1. Ran it with my input files and it outputted correctly.
